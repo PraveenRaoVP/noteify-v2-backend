@@ -1,6 +1,9 @@
 const express = require("express");
 require('./db/mongoose.js');
 const userRouter = require('./routes/user-routers');
+const noteRouter = require('./routes/note-routers');
+const cors = require("cors");
+
 
 const app = express();
 
@@ -15,8 +18,10 @@ app.use((req,res,next) => {
     next();
 });
 
-app.use(express.json())
-app.use(userRouter)
+app.use(express.json());
+app.use(cors());
+app.use(userRouter);
+app.use(noteRouter);
 
 const port = process.env.PORT || 8000;
 

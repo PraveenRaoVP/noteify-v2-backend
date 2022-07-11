@@ -1,6 +1,5 @@
 const express = require("express");
 const User = require("../models/user");
-const user = require("../models/user");
 const auth = require("../middlewares/auth")
 
 const router = new express.Router();
@@ -16,7 +15,7 @@ router.post("/users/create", async(req,res) => {
         res.status(201).send({user, token, message: "New account created"});
     } catch(e) {
         console.log("Error")
-        if((user.password.length < 8)) {
+        if(user.password.length < 8) {
             res.status(500).send({message: "Password needs to be more than 8 characters"})
         } else if(e.keyPattern.userName == 1){
             res.status.send({message: "Username already exists."})
